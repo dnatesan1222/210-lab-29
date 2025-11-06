@@ -1,0 +1,135 @@
+// COMSC-210 | Lab 29 | Diksha Tara Natesan
+// IDE used: Vim/Terminal
+
+//Include necessary headers for file handling, data structures, etc.
+#include <iostream>
+#include <fstream>
+#include <map>
+#include <array>
+#include <list>
+#include <string>
+using namespace std;
+
+//index 0: menu items, index 1: customers, index 2: profits
+using BAKERY = array<list<string>, 3>;
+
+//Define a function to simulate renovations (15% likelihood)
+	//Parameters: key-value pair of a bakery location
+void renovation(pair<const string, BAKERY> &bakery);
+
+//Define a function to simulate a rival bakery opening/closing (30% likelihood)
+	//Parameters: key-value pair of a bakery location
+void rival(pair<const string, BAKERY> &bakery);
+
+//Define a function to simulate an ingredient being out of stock (25% likelihood)
+	//Parameters: key-value pair of a bakery location
+void outOfStock(pair<const string, BAKERY> &bakery);
+
+//Define a function to simulate an ingredient that was out of stock last quarter being back in stock
+	//Parameters: key-value pair of a bakery location
+void backInStock(pair<const string, BAKERY> &bakery);
+
+//Define a function that chooses one of the events to occur - with somewhat realistic likelihoods of any event occuring.
+	//Parameters: map of bakery locations
+void event(map<string, array<list<string>, 3>> &bakeries);
+
+//Define a function that adds fall seasonal menu items
+	//Parameters: map of bakery locations
+void autumn(map<string, array<list<string>, 3>> &bakeries);
+
+//Define a function that removes fall seasonal menu items and adds winter seasonal menu items
+	//Parameters: map of bakery locations
+void winter(map<string, array<list<string>, 3>> &bakeries);
+
+//Define a function that removes winter seasonal menu items
+	//Parameters: map of bakery locations
+void regular(map<string, array<list<string>, 3>> &bakeries);
+
+//Define a function that displays all the map information
+	//Parameters: map of bakery locations, int specifying the quarter it is printing
+void display(map<string, array<list<string>, 3>> &bakeries, int qtr);
+
+//Define main function
+int main(){
+	cout << "\n\t*** Tara's Bakes Simulation (wireframe) ***\n\n";
+
+	//Initialize a map to store bakery location information each associated with an array of lists for number of customers per week of the quarter, menu items for the quarter, and the profits of each week in the quarter
+	map<string, BAKERY> bakeries;
+	BAKERY sf;
+	sf[0].push_back("Coffee");
+	sf[1].push_back("250");		//customers
+	sf[2].push_back("$1200");	//profits
+	bakeries["San Francisco"] = sf;
+	display(bakeries, 0);
+
+	//Open an external file to read initial data about bakery locations and populate the map
+		//If file does not open, print an error and exit
+	//Read data from file and populate map
+		//For each line, extract bakery location and its corresponding categorical data
+		//Insert data into the appropriate category's list
+	//Close the file
+	
+	//testing wireframe functions:
+	auto it = bakeries.find("San Francisco");
+if (it != bakeries.end()) {
+    renovation(*it);
+    rival(*it);
+    outOfStock(*it);
+    backInStock(*it);
+}
+	event(bakeries);
+	autumn(bakeries);
+	winter(bakeries);
+	regular(bakeries);
+
+	//Begin a time-based simulation for quarterly changes
+		//For 28 yearly quarters as the time intervals (7 year projection)
+			//Update menu items based on the season (sales should stay about the same since we are assuming the farmer's markets affect the spring/summer season's customers/profits in the same way seasonal items do)
+			//Iterate through each bakery location in the map
+				//For each location, simulate changes
+					//25% chance of a menu item being removed for a quarter - ensure it gets brought back for the next quarter along with sales returning to normal
+					//Print the changes for this quarter, "{menu item} out of stock decreased {customers and/or profits} in {bakery location}"
+			//Call the function that chooses an event to occur
+			//The events can impact multiple locations or one location
+			//Wait briefly to simulate the passage of time between quarters
+	cout << "\n*** End of Tara's Bakes Simulation (wireframe) ***\n";
+//End of main function
+}
+
+//dummy functions
+void renovation(pair<const string, BAKERY> &bakery){
+	cout << "[renovation()] Renovations for Tara's Bakes at {city} location\n";
+}
+void rival(pair<const string, BAKERY> &bakery){
+	cout << "[rival()] Rival bakery opens in {city}\n";
+}
+void outOfStock(pair<const string, BAKERY> &bakery){
+	cout << "[outOfStock()] {menu item} is unavailable at Tara's Bakes in {city} location\n";
+}
+void backInStock(pair<const string, BAKERY> &bakery){
+	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
+}
+void event(map<string, array<list<string>, 3>> &bakeries){
+	cout << "[event()] Random Event possibly occurs affecting {city} bakery\n";
+}
+void autumn(map<string, array<list<string>, 3>> &bakeries){
+	cout << "[autumn()] Fall Items have been added to all menus\n";
+}
+void winter(map<string, array<list<string>, 3>> &bakeries){
+	cout << "[winter()] Winter Items have been added to (and Fall Items have been removed from) all menus\n";
+}
+void regular(map<string, array<list<string>, 3>> &bakeries){
+	cout << "[regular()] Seasonal Items have been removed from all menus\n";
+}
+void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
+	cout << "[wireframe] Q" << qtr << " Bakery Data:\n";
+	for(const auto &[city, data]:bakeries){
+		cout << '\t' << city << " Location:\n";
+		cout << "\tMenu Items\t\tCustomers\t\tProfits\n";
+		//loop here so each list gets fully printed
+		cout << '\t' << data[0].front() << "\t\t\t" << data[1].front() << "\t\t\t" << data[2].front() << endl;
+		cout << '\n';
+	}
+
+}
+

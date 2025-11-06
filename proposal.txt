@@ -1,0 +1,11 @@
+Project Overview:
+My project creates a bakery simulation. Let's call the bakery Tara's Bakes. The program is designed to help Tara recognize patterns in customer sales to maximize her bakery's profits. This software will simulate events such as holiday seasons, farmer's markets, renovations, rival bakeries, and/or unavailable supplies to illustrate the impact of these events on Tara's business.
+
+Implementation:
+I plan to use a std::map to store and manage data related to menu items and weekly customers/profits  across four bakery locations. The maps will have three std::lists with the categories: number of customers (in one week), menu items for the quarter, and weekly profits. Each map's key will be represented by the city of the bakery's location, while the value will be an array of the three aforementioned categories. The maps will represent locations in San Francisco (SF), New York City (NYC), Philadelphia (PHL), and Chicago (CHI). The time steps will occur as yearly quarters (~13 weeks of profits/customers stored in each map).
+
+Simulated Events:
+The simulation will focus on how seasons, farmer's markets, renovations, openings of a rival bakeries, and unavailable ingredients will impact business. Consistent factors: The fall and winter quarters will have seasonal specials that change the list of menu items. Farmer's markets will occur in spring and summer quarters and will generate more customers as it will serve as an advertisement while simultaneously generating sales.
+
+At any given time, an ingredient could be out of stock - affecting the menu items, renovations could be necessary causing the bakery to close for x number of weeks - affecting weeks of customers/profits, or a rival bakery could open - affecting # of weekly customers and profits.
+ 
