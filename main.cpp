@@ -14,39 +14,39 @@ using namespace std;
 using BAKERY = array<list<string>, 3>;
 
 //Define a function to simulate renovations (15% likelihood)
-	//Parameters: key-value pair of a bakery location
+//Parameters: key-value pair of a bakery location
 void renovation(pair<const string, BAKERY> &bakery);
 
 //Define a function to simulate a rival bakery opening/closing (30% likelihood)
-	//Parameters: key-value pair of a bakery location
+//Parameters: key-value pair of a bakery location
 void rival(pair<const string, BAKERY> &bakery);
 
 //Define a function to simulate an ingredient being out of stock (25% likelihood)
-	//Parameters: key-value pair of a bakery location
+//Parameters: key-value pair of a bakery location
 void outOfStock(pair<const string, BAKERY> &bakery);
 
 //Define a function to simulate an ingredient that was out of stock last quarter being back in stock
-	//Parameters: key-value pair of a bakery location
+//Parameters: key-value pair of a bakery location
 void backInStock(pair<const string, BAKERY> &bakery);
 
 //Define a function that chooses one of the events to occur - with somewhat realistic likelihoods of any event occuring.
-	//Parameters: map of bakery locations
+//Parameters: map of bakery locations
 void event(map<string, array<list<string>, 3>> &bakeries);
 
 //Define a function that adds fall seasonal menu items
-	//Parameters: map of bakery locations
+//Parameters: map of bakery locations
 void autumn(map<string, array<list<string>, 3>> &bakeries);
 
 //Define a function that removes fall seasonal menu items and adds winter seasonal menu items
-	//Parameters: map of bakery locations
+//Parameters: map of bakery locations
 void winter(map<string, array<list<string>, 3>> &bakeries);
 
 //Define a function that removes winter seasonal menu items
-	//Parameters: map of bakery locations
+//Parameters: map of bakery locations
 void regular(map<string, array<list<string>, 3>> &bakeries);
 
 //Define a function that displays all the map information
-	//Parameters: map of bakery locations, int specifying the quarter it is printing
+//Parameters: map of bakery locations, int specifying the quarter it is printing
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr);
 
 //Define main function
@@ -63,37 +63,37 @@ int main(){
 	display(bakeries, 0);
 
 	//Open an external file to read initial data about bakery locations and populate the map
-		//If file does not open, print an error and exit
+	//If file does not open, print an error and exit
 	//Read data from file and populate map
-		//For each line, extract bakery location and its corresponding categorical data
-		//Insert data into the appropriate category's list
+	//For each line, extract bakery location and its corresponding categorical data
+	//Insert data into the appropriate category's list
 	//Close the file
-	
+
 	//testing wireframe functions:
 	auto it = bakeries.find("San Francisco");
-if (it != bakeries.end()) {
-    renovation(*it);
-    rival(*it);
-    outOfStock(*it);
-    backInStock(*it);
-}
+	if (it != bakeries.end()) {
+		renovation(*it);
+		rival(*it);
+		outOfStock(*it);
+		backInStock(*it);
+	}
 	event(bakeries);
 	autumn(bakeries);
 	winter(bakeries);
 	regular(bakeries);
 
 	//Begin a time-based simulation for quarterly changes
-		//For 28 yearly quarters as the time intervals (7 year projection)
-			//Update menu items based on the season (sales should stay about the same since we are assuming the farmer's markets affect the spring/summer season's customers/profits in the same way seasonal items do)
-			//Iterate through each bakery location in the map
-				//For each location, simulate changes
-					//25% chance of a menu item being removed for a quarter - ensure it gets brought back for the next quarter along with sales returning to normal
-					//Print the changes for this quarter, "{menu item} out of stock decreased {customers and/or profits} in {bakery location}"
-			//Call the function that chooses an event to occur
-			//The events can impact multiple locations or one location
-			//Wait briefly to simulate the passage of time between quarters
+	//For 28 yearly quarters as the time intervals (7 year projection)
+	//Update menu items based on the season (sales should stay about the same since we are assuming the farmer's markets affect the spring/summer season's customers/profits in the same way seasonal items do)
+	//Iterate through each bakery location in the map
+	//For each location, simulate changes
+	//25% chance of a menu item being removed for a quarter - ensure it gets brought back for the next quarter along with sales returning to normal
+	//Print the changes for this quarter, "{menu item} out of stock decreased {customers and/or profits} in {bakery location}"
+	//Call the function that chooses an event to occur
+	//The events can impact multiple locations or one location
+	//Wait briefly to simulate the passage of time between quarters
 	cout << "\n*** End of Tara's Bakes Simulation (wireframe) ***\n";
-//End of main function
+	//End of main function
 }
 
 //dummy functions
