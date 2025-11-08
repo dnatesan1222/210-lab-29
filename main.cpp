@@ -58,7 +58,7 @@ int main(){
 	//Initialize a map to store bakery location information each associated with an array of lists for number of customers per week of the quarter, menu items for the quarter, and the profits of each week in the quarter
 	map<string, BAKERY> bakeries;
 	//populate w empty locations
-	bakeries["SF"] = BAKERY{};
+	bakeries["SFO"] = BAKERY{};
 	bakeries["CHI"] = BAKERY{};
 	bakeries["NYC"] = BAKERY{};
 	bakeries["PHL"] = BAKERY{};
@@ -87,18 +87,6 @@ int main(){
 	fin.close();
 	
 	display(bakeries, 0);
-	//testing wireframe functions:
-	auto it = bakeries.find("San Francisco");
-	if (it != bakeries.end()) {
-		renovation(*it);
-		rival(*it);
-		outOfStock(*it);
-		backInStock(*it);
-	}
-	event(bakeries);
-	autumn(bakeries);
-	winter(bakeries);
-	regular(bakeries);
 
 	//Begin a time-based simulation for quarterly changes
 	//For 28 yearly quarters as the time intervals (7 year projection)
@@ -143,11 +131,21 @@ void regular(map<string, array<list<string>, 3>> &bakeries){
 } */
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 	cout << "[wireframe] Q" << qtr << " Bakery Data:\n";
+	
 	for(const auto &[city, data]:bakeries){
 		cout << '\t' << city << " Location:\n";
 		cout << "\tMenu Items\t\tCustomers\t\tProfits\n";
 		//loop here so each list gets fully printed
-		cout << '\t' << data[0].front() << "\t\t\t" << data[1].front() << "\t\t\t" << data[2].front() << endl;
+		auto itItem = data[0].begin();
+       		auto itCust = data[1].begin();
+        	auto itProf = data[2].begin();
+		
+		while (itItem != data[0].end()){
+			cout << '\t' << *itItem << "\t\t\t" << *itCust << "\t\t\t" << *itProf << endl;
+			++itItem;
+            		++itCust;
+            		++itProf;
+		}
 		cout << '\n';
 	}
 
