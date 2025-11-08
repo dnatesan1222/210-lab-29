@@ -53,29 +53,40 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr);
 
 //Define main function
 int main(){
-	cout << "\n\t*** Tara's Bakes Simulation (wireframe) ***\n\n";
+	cout << "\n\t*** Tara's Bakes Simulation ***\n\n";
 
 	//Initialize a map to store bakery location information each associated with an array of lists for number of customers per week of the quarter, menu items for the quarter, and the profits of each week in the quarter
 	map<string, BAKERY> bakeries;
-	BAKERY sf;
-	sf[0].push_back("Coffee");
-	sf[1].push_back("250");		//customers
-	sf[2].push_back("$1200");	//profits
-	bakeries["San Francisco"] = sf;
+	//populate w empty locations
+	bakeries["SF"] = BAKERY{};
+	bakeries["CHI"] = BAKERY{};
+	bakeries["NYC"] = BAKERY{};
+	bakeries["PHL"] = BAKERY{};
 	display(bakeries, 0);
 
 	//Open an external file to read initial data about bakery locations and populate the map
-	ifstream fin("bakerySF.txt");
+	ifstream fin("bakerydata.txt");
 	//If file does not open, print an error and exit
 	if (!fin) {
 		cerr << "Error: could not open bakerySF.txt\n";
 		return 1;
 	}
+	string city;
+	string item;
+	string customers;
+	string profit;
 	//Read data from file and populate map
 	//For each line, extract bakery location and its corresponding categorical data
-	//Insert data into the appropriate category's list
-	//Close the file
-
+        //Insert data into the appropriate category's list
+        //Close the file
+	while (fin >> city >> item >> customers >> profit) {
+		bakeries[city][0].push_back(item);
+		bakeries[city][1].push_back(customers);
+		bakeries[city][2].push_back(profit);
+	}
+	fin.close();
+	
+	display(bakeries, 0);
 	//testing wireframe functions:
 	auto it = bakeries.find("San Francisco");
 	if (it != bakeries.end()) {
