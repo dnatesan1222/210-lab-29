@@ -1,0 +1,35 @@
+/*
+The display() function prints all bakery data including menu items, customer numbers, and profits for each city in the simulation. The goal of the test is to check that display():
+- iterates through the map and prints data for each bakery
+- aligns menu items, customers, and profits in their respective columns
+- doesn't skip list elements
+Works correctly even when one or more bakeries have different list sizes.
+Here is the driver program: */
+
+#include <iostream>
+#include <map>
+#include <array>
+#include <list>
+#include <string>
+using namespace std;
+
+using BAKERY = array<list<string>, 3>;
+
+int main() {
+    map<string, BAKERY> bakeries;
+
+    // test data
+    bakeries["SFO"][0] = {"Latte", "Cookie"};
+    bakeries["SFO"][1] = {"75", "72"};
+    bakeries["SFO"][2] = {"$415", "$389"};
+
+    bakeries["NYC"][0] = {"Cupcake"};
+    bakeries["NYC"][1] = {"81"};
+    bakeries["NYC"][2] = {"$563"};
+
+    cout << "Running unit test for display():\n";
+    display(bakeries, 1);
+    cout << "If bakery data prints correctly and is aligned, the display() is successful.\n";
+    return 0;
+}
+

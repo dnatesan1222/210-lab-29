@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // COMSC-210 | Lab 29 | Diksha Tara Natesan
+=======
+// COMSC-210 | Lab 30 | Diksha Tara Natesan
+>>>>>>> alpha
 // IDE used: Vim/Terminal
 
 //Include necessary headers for file handling, data structures, etc.
@@ -33,6 +37,10 @@ void backInStock(pair<const string, BAKERY> &bakery);
 //Parameters: map of bakery locations
 void event(map<string, array<list<string>, 3>> &bakeries);
 
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> alpha
 //Define a function that adds fall seasonal menu items
 //Parameters: map of bakery locations
 void autumn(map<string, array<list<string>, 3>> &bakeries);
@@ -44,6 +52,10 @@ void winter(map<string, array<list<string>, 3>> &bakeries);
 //Define a function that removes winter seasonal menu items
 //Parameters: map of bakery locations
 void regular(map<string, array<list<string>, 3>> &bakeries);
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> alpha
 
 //Define a function that displays all the map information
 //Parameters: map of bakery locations, int specifying the quarter it is printing
@@ -51,6 +63,7 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr);
 
 //Define main function
 int main(){
+<<<<<<< HEAD
 	cout << "\n\t*** Tara's Bakes Simulation (wireframe) ***\n\n";
 
 	//Initialize a map to store bakery location information each associated with an array of lists for number of customers per week of the quarter, menu items for the quarter, and the profits of each week in the quarter
@@ -81,6 +94,42 @@ int main(){
 	autumn(bakeries);
 	winter(bakeries);
 	regular(bakeries);
+=======
+	cout << "\n\t*** Tara's Bakes Simulation ***\n\n";
+
+	//Initialize a map to store bakery location information each associated with an array of lists for number of customers per week of the quarter, menu items for the quarter, and the profits of each week in the quarter
+	map<string, BAKERY> bakeries;
+	//populate w empty locations
+	bakeries["SFO"] = BAKERY{};
+	bakeries["CHI"] = BAKERY{};
+	bakeries["NYC"] = BAKERY{};
+	bakeries["PHL"] = BAKERY{};
+	display(bakeries, 0);
+
+	//Open an external file to read initial data about bakery locations and populate the map
+	ifstream fin("bakerydata.txt");
+	//If file does not open, print an error and exit
+	if (!fin) {
+		cerr << "Error: could not open bakerySF.txt\n";
+		return 1;
+	}
+	string city;
+	string item;
+	string customers;
+	string profit;
+	//Read data from file and populate map
+	//For each line, extract bakery location and its corresponding categorical data
+        //Insert data into the appropriate category's list
+        //Close the file
+	while (fin >> city >> item >> customers >> profit) {
+		bakeries[city][0].push_back(item);
+		bakeries[city][1].push_back(customers);
+		bakeries[city][2].push_back(profit);
+	}
+	fin.close();
+	
+	display(bakeries, 0);
+>>>>>>> alpha
 
 	//Begin a time-based simulation for quarterly changes
 	//For 28 yearly quarters as the time intervals (7 year projection)
@@ -112,7 +161,13 @@ void backInStock(pair<const string, BAKERY> &bakery){
 void event(map<string, array<list<string>, 3>> &bakeries){
 	cout << "[event()] Random Event possibly occurs affecting {city} bakery\n";
 }
+<<<<<<< HEAD
 void autumn(map<string, array<list<string>, 3>> &bakeries){
+=======
+
+//no longer using these functions - they are unnecessary (maybe this can be implemnted as an update later on)
+/* void autumn(map<string, array<list<string>, 3>> &bakeries){
+>>>>>>> alpha
 	cout << "[autumn()] Fall Items have been added to all menus\n";
 }
 void winter(map<string, array<list<string>, 3>> &bakeries){
@@ -120,14 +175,34 @@ void winter(map<string, array<list<string>, 3>> &bakeries){
 }
 void regular(map<string, array<list<string>, 3>> &bakeries){
 	cout << "[regular()] Seasonal Items have been removed from all menus\n";
+<<<<<<< HEAD
 }
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 	cout << "[wireframe] Q" << qtr << " Bakery Data:\n";
+=======
+} */
+void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
+	cout << "[wireframe] Q" << qtr << " Bakery Data:\n";
+	
+>>>>>>> alpha
 	for(const auto &[city, data]:bakeries){
 		cout << '\t' << city << " Location:\n";
 		cout << "\tMenu Items\t\tCustomers\t\tProfits\n";
 		//loop here so each list gets fully printed
+<<<<<<< HEAD
 		cout << '\t' << data[0].front() << "\t\t\t" << data[1].front() << "\t\t\t" << data[2].front() << endl;
+=======
+		auto itItem = data[0].begin();
+       		auto itCust = data[1].begin();
+        	auto itProf = data[2].begin();
+		
+		while (itItem != data[0].end()){
+			cout << '\t' << *itItem << "\t\t\t" << *itCust << "\t\t\t" << *itProf << endl;
+			++itItem;
+            		++itCust;
+            		++itProf;
+		}
+>>>>>>> alpha
 		cout << '\n';
 	}
 
