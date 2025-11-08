@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 29 | Diksha Tara Natesan
+// COMSC-210 | Lab 30 | Diksha Tara Natesan
 // IDE used: Vim/Terminal
 
 //Include necessary headers for file handling, data structures, etc.
@@ -33,6 +33,7 @@ void backInStock(pair<const string, BAKERY> &bakery);
 //Parameters: map of bakery locations
 void event(map<string, array<list<string>, 3>> &bakeries);
 
+/*
 //Define a function that adds fall seasonal menu items
 //Parameters: map of bakery locations
 void autumn(map<string, array<list<string>, 3>> &bakeries);
@@ -44,6 +45,7 @@ void winter(map<string, array<list<string>, 3>> &bakeries);
 //Define a function that removes winter seasonal menu items
 //Parameters: map of bakery locations
 void regular(map<string, array<list<string>, 3>> &bakeries);
+*/
 
 //Define a function that displays all the map information
 //Parameters: map of bakery locations, int specifying the quarter it is printing
@@ -63,7 +65,12 @@ int main(){
 	display(bakeries, 0);
 
 	//Open an external file to read initial data about bakery locations and populate the map
+	ifstream fin("bakerySF.txt");
 	//If file does not open, print an error and exit
+	if (!fin) {
+		cerr << "Error: could not open bakerySF.txt\n";
+		return 1;
+	}
 	//Read data from file and populate map
 	//For each line, extract bakery location and its corresponding categorical data
 	//Insert data into the appropriate category's list
@@ -112,7 +119,9 @@ void backInStock(pair<const string, BAKERY> &bakery){
 void event(map<string, array<list<string>, 3>> &bakeries){
 	cout << "[event()] Random Event possibly occurs affecting {city} bakery\n";
 }
-void autumn(map<string, array<list<string>, 3>> &bakeries){
+
+//no longer using these functions - they are unnecessary (maybe this can be implemnted as an update later on)
+/* void autumn(map<string, array<list<string>, 3>> &bakeries){
 	cout << "[autumn()] Fall Items have been added to all menus\n";
 }
 void winter(map<string, array<list<string>, 3>> &bakeries){
@@ -120,7 +129,7 @@ void winter(map<string, array<list<string>, 3>> &bakeries){
 }
 void regular(map<string, array<list<string>, 3>> &bakeries){
 	cout << "[regular()] Seasonal Items have been removed from all menus\n";
-}
+} */
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 	cout << "[wireframe] Q" << qtr << " Bakery Data:\n";
 	for(const auto &[city, data]:bakeries){
