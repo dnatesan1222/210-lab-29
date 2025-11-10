@@ -90,9 +90,13 @@ int main(){
 	//End of main function
 }
 
-//dummy functions
+
 void renovation(pair<const string, BAKERY> &bakery){
-	cout << "[renovation()] Renovations for Tara's Bakes at {city} location\n";
+	bakery.second[1].pop_back();
+	bakery.second[1].pop_back();
+	bakery.second[2].pop_back();
+	bakery.second[2].pop_back();
+	cout << "Renovations for Tara's Bakes at " << bakery.first << " location\n";
 }
 void rival(pair<const string, BAKERY> &bakery){
 	list<string> &cust = bakery.second[1];
@@ -105,8 +109,10 @@ void rival(pair<const string, BAKERY> &bakery){
 		holder = customer + "";
 		updated.push_back(holder);
     	}
+
+	bakery.second[1] = updated;
 	
-	cout << "[rival()] Rival bakery opens in " << bakery.first << endl;
+	cout << "Rival bakery opens in " << bakery.first << endl;
 }
 void outOfStock(pair<const string, BAKERY> &bakery){
 
@@ -128,6 +134,7 @@ void backInStock(pair<const string, BAKERY> &bakery){
 	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
 }
 void event(map<string, array<list<string>, 3>> &bakeries){
+	cout << "\nQuarter events:\n";
 	bool event = false;
 	int prob = rand() % 100 + 1;  // returns random number 1-100
 	for (auto &pair : bakeries){
@@ -148,7 +155,8 @@ void event(map<string, array<list<string>, 3>> &bakeries){
 	}
 
 	if (!event)
-		cout << "\nNo significant events occurred this quarter.\n";
+		cout << "\tNo significant events occurred this quarter.\n";
+	cout << '\n';
 }
 
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
