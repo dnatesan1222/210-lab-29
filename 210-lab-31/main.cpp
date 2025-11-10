@@ -101,13 +101,11 @@ void renovation(pair<const string, BAKERY> &bakery){
 void rival(pair<const string, BAKERY> &bakery){
 	list<string> &cust = bakery.second[1];
 	list<string> updated;
-	string holder;
-	
+
 	for (string c : cust) {
         	int customer = stoi(c);
         	customer = (customer * 0.75);  		//decrease by 25%
-		holder = customer + "";
-		updated.push_back(holder);
+		updated.push_back(to_string(customer));
     	}
 
 	bakery.second[1] = updated;
@@ -119,7 +117,7 @@ void outOfStock(pair<const string, BAKERY> &bakery){
 	int prob = rand() % bakery.second[0].size();
 	string item;
 	int count = -1;	
-	for (string i : bakery.second[0])
+	for (string i : bakery.second[0]){
 		count += 1;
 		if (count == prob){
 			item = i;
@@ -163,8 +161,11 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 	
 	if (qtr != 0){
 		int year = ((qtr-1)/4) + 1;
-		qtr %=4;
-		cout << "Q" << qtr << " Bakery Data:\n";
+		if ((qtr%4) == 0)
+			qtr = 4;
+		else
+			qtr %= 4;
+		cout << "Y" << year "Q" << qtr << " Bakery Data:\n";
 	}else
 		cout << "Starting Bakery Data:\n";
 	for(const auto &[city, data]:bakeries){
