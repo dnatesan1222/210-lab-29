@@ -14,7 +14,8 @@ Bugs:
 
 7. display() only prints based on whether a menu item exist, but we want it to print all customer and profits even if there are more in those lists than the menu items list (edit the while loop conditions)
 
-8.
-9.
-10.
+8. random numbers were not properly being calculated - bug was fixed by adding "srand(time(0));" to the beginning of the main function
 
+9. alignment for the city locations in the display() was odd, added an extra '\t' to better center it
+
+10. backInStock function went unused - removed the function to make code cleaner (also removed seasonal functions that went unused) 

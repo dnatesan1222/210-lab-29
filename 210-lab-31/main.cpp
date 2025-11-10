@@ -27,10 +27,6 @@ void rival(pair<const string, BAKERY> &bakery);
 //Parameters: key-value pair of a bakery location
 void outOfStock(pair<const string, BAKERY> &bakery);
 
-//Define a function to simulate an ingredient that was out of stock last quarter being back in stock
-//Parameters: key-value pair of a bakery location
-void backInStock(pair<const string, BAKERY> &bakery);
-
 //Define a function that chooses one of the events to occur - with somewhat realistic likelihoods of any event occuring.
 //Parameters: map of bakery locations
 void event(map<string, array<list<string>, 3>> &bakeries);
@@ -132,9 +128,7 @@ void outOfStock(pair<const string, BAKERY> &bakery){
 
 	cout << item << " is unavailable at Tara's Bakes in " << bakery.first << " location\n";
 }
-void backInStock(pair<const string, BAKERY> &bakery){
-	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
-}
+
 void event(map<string, array<list<string>, 3>> &bakeries){
 	cout << "\nQuarter events:\n";
 	bool event = false;
@@ -183,7 +177,7 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 		auto itCust = data[1].begin();
 		auto itProf = data[2].begin();
 
-		while (itItem != data[0].end()){
+		while (itItem != data[0].end() && itCust != data[1].end() && itProf != data[2].end()){
 			cout << left
 				<< setw(20) << *itItem 
 				<< setw(20) << *itCust 
