@@ -8,6 +8,8 @@
 #include <array>
 #include <list>
 #include <string>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 //index 0: menu items, index 1: customers, index 2: profits
@@ -39,6 +41,7 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr);
 
 //Define main function
 int main(){
+	srand(time(0));
 	cout << "\n\t*** Tara's Bakes Simulation ***\n\n";
 
 	//Initialize a map to store bakery location information each associated with an array of lists for number of customers per week of the quarter, menu items for the quarter, and the profits of each week in the quarter
@@ -62,8 +65,8 @@ int main(){
 	string profit;
 	//Read data from file and populate map
 	//For each line, extract bakery location and its corresponding categorical data
-        //Insert data into the appropriate category's list
-        //Close the file
+	//Insert data into the appropriate category's list
+	//Close the file
 	while (fin >> city >> item >> customers >> profit) {
 		bakeries[city][0].push_back(item);
 		bakeries[city][1].push_back(customers);
@@ -74,16 +77,16 @@ int main(){
 	display(bakeries, qtr);
 	//Begin a time-based simulation for quarterly changes
 	for (int i = 0; i < 28; i++){
-	//For 28 yearly quarters as the time intervals (7 year projection)
+		//For 28 yearly quarters as the time intervals (7 year projection)
 		qtr += 1;
-	//Iterate through each bakery location in the map
-	//For each location, simulate changes
-	//25% chance of a menu item being removed for a quarter - ensure it gets brought back for the next quarter along with sales returning to normal
-			event(bakeries);
-	//Print the changes for this quarter, "{menu item} out of stock decreased {customers and/or profits} in {bakery location}"
-	//Call the function that chooses an event to occur
-	//The events can impact multiple locations or one location
-	//Wait briefly to simulate the passage of time between quarters
+		//Iterate through each bakery location in the map (event() does this)
+		//For each location, simulate changes
+		//Print the changes for this quarter, "{menu item} out of stock decreased {customers and/or profits} in {bakery location}"
+		//Call the function that chooses an event to occur
+		event(bakeries);
+		//The events can impact multiple locations or one location
+		//Wait briefly to simulate the passage of time between quarters
+		this_thread::sleep_for(chrono::seconds(10));		//waits for 10sec
 		display(bakeries, qtr);
 	}
 	cout << "\n*** End of Tara's Bakes Simulation (wireframe) ***\n";
@@ -103,13 +106,13 @@ void rival(pair<const string, BAKERY> &bakery){
 	list<string> updated;
 
 	for (string c : cust) {
-        	int customer = stoi(c);
-        	customer = (customer * 0.75);  		//decrease by 25%
+		int customer = stoi(c);
+		customer = (customer * 0.75);  		//decrease by 25%
 		updated.push_back(to_string(customer));
-    	}
+	}
 
 	bakery.second[1] = updated;
-	
+
 	cout << "Rival bakery opens in " << bakery.first << endl;
 }
 void outOfStock(pair<const string, BAKERY> &bakery){
@@ -125,7 +128,7 @@ void outOfStock(pair<const string, BAKERY> &bakery){
 		}
 	}
 	bakery.second[0].remove(item);
- 
+
 	cout << item << " is unavailable at Tara's Bakes in " << bakery.first << " location\n";
 }
 void backInStock(pair<const string, BAKERY> &bakery){
@@ -143,13 +146,13 @@ void event(map<string, array<list<string>, 3>> &bakeries){
 		prob = rand() % 100 + 1;
 		if (prob <= 15){
 			renovation(pair);
-       	 		event = true;
-        	}
+			event = true;
+		}
 		prob = rand() % 100 + 1;
-	       	if (prob <= 30){
+		if (prob <= 30){
 			rival(pair);
-        	        event = true;
-	        }
+			event = true;
+		}
 	}
 
 	if (!event)
@@ -158,14 +161,14 @@ void event(map<string, array<list<string>, 3>> &bakeries){
 }
 
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
-	
+
 	if (qtr != 0){
 		int year = ((qtr-1)/4) + 1;
 		if ((qtr%4) == 0)
 			qtr = 4;
 		else
 			qtr %= 4;
-		cout << "Y" << year "Q" << qtr << " Bakery Data:\n";
+		cout << "Y" << year << " Q" << qtr << " Bakery Data:\n";
 	}else
 		cout << "Starting Bakery Data:\n";
 	for(const auto &[city, data]:bakeries){
@@ -173,14 +176,14 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 		cout << "\tMenu Items\t\tCustomers\t\tProfits\n";
 		//loop here so each list gets fully printed
 		auto itItem = data[0].begin();
-       		auto itCust = data[1].begin();
-        	auto itProf = data[2].begin();
-		
+		auto itCust = data[1].begin();
+		auto itProf = data[2].begin();
+
 		while (itItem != data[0].end()){
 			cout << '\t' << *itItem << "\t\t\t" << *itCust << "\t\t\t" << *itProf << endl;
 			++itItem;
-            		++itCust;
-            		++itProf;
+			++itCust;
+			++itProf;
 		}
 		cout << '\n';
 	}
