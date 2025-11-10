@@ -1,0 +1,17 @@
+Bugs:
+
+1. holder = customer + ""; --> does not convert to int to string. must update so it converts using to_string()
+
+2. Q4 is showing up as Q0 - update the display() and include the year in the updates
+
+3. waiting time is odd - changing it so there is a short wait after the changes are displayed then a longer wait after the entire quarter results are dispalyed
+
+4. the alignment of the number are slightly off - coding to use setw for display()
+
+5.
+6.
+7.
+8.
+9.
+10.
+

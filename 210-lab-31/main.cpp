@@ -77,6 +77,7 @@ int main(){
 	display(bakeries, qtr);
 	//Begin a time-based simulation for quarterly changes
 	for (int i = 0; i < 28; i++){
+		this_thread::sleep_for(chrono::seconds(10));            //waits for 10sec
 		//For 28 yearly quarters as the time intervals (7 year projection)
 		qtr += 1;
 		//Iterate through each bakery location in the map (event() does this)
@@ -86,7 +87,7 @@ int main(){
 		event(bakeries);
 		//The events can impact multiple locations or one location
 		//Wait briefly to simulate the passage of time between quarters
-		this_thread::sleep_for(chrono::seconds(10));		//waits for 10sec
+		this_thread::sleep_for(chrono::seconds(4));		//waits for 4sec
 		display(bakeries, qtr);
 	}
 	cout << "\n*** End of Tara's Bakes Simulation (wireframe) ***\n";
