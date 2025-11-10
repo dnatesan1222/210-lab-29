@@ -207,4 +207,3 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 	}
 
 }
-
