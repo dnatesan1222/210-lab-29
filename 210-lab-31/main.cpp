@@ -98,8 +98,20 @@ void rival(pair<const string, BAKERY> &bakery){
 	cout << "[rival()] Rival bakery opens in {city}\n";
 }
 void outOfStock(pair<const string, BAKERY> &bakery){
-	bakery[{city}][0]
-	cout << "[outOfStock()] {menu item} is unavailable at Tara's Bakes in {city} location\n";
+	string city = bakery.first;
+	int prob = rand() % bakery[city][0].size();
+	string item;
+	int count = -1;	
+	for (string i : bakery[city][0])
+		count += 1;
+		if (count == randIndex){
+			item = i;
+			break;
+		}
+	}
+	bakery[city][0].remove(item);
+
+	cout << '\n' << item << " is unavailable at Tara's Bakes in " << city << " location\n";
 }
 void backInStock(pair<const string, BAKERY> &bakery){
 	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
