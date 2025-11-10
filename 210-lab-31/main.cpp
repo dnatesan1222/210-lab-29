@@ -48,13 +48,12 @@ int main(){
 	bakeries["CHI"] = BAKERY{};
 	bakeries["NYC"] = BAKERY{};
 	bakeries["PHL"] = BAKERY{};
-	display(bakeries, 0);
 
 	//Open an external file to read initial data about bakery locations and populate the map
 	ifstream fin("bakerydata.txt");
 	//If file does not open, print an error and exit
 	if (!fin) {
-		cerr << "Error: could not open bakerySF.txt\n";
+		cerr << "Error: could not open bakerydata.txt\n";
 		return 1;
 	}
 	string city;
@@ -105,13 +104,47 @@ void backInStock(pair<const string, BAKERY> &bakery){
 	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
 }
 void event(map<string, array<list<string>, 3>> &bakeries){
-	for (int i = 0; i < 4; i++){
-		int prob = rand() % 100 + 1;  // returns random number 1-100
-		if (prob <= 25)
-			outOfStock(bakeries
 
-	}
-	cout << "[event()] Random Event possibly occurs affecting {city} bakery\n";
+	int prob = rand() % 100 + 1;  // returns random number 1-100
+	if (prob <= 25)
+		outOfStock(bakeries["SFO"]);
+	prob = rand() % 100 + 1;
+	if (prob <= 15)
+		renovation(bakeries["SFO"]);
+	prob = rand() % 100 + 1;
+        if (prob <= 30)
+		rival(bakeries["SFO"]);
+
+	prob = rand() % 100 + 1;
+	if (prob <= 25)
+                outOfStock(bakeries["CHI"]);
+        prob = rand() % 100 + 1;
+        if (prob <= 15)
+                renovation(bakeries["CHI"]);
+        prob = rand() % 100 + 1;
+        if (prob <= 30)
+                rival(bakeries["CHI"]);
+
+	prob = rand() % 100 + 1;
+        if (prob <= 25)
+                outOfStock(bakeries["NYC"]);
+        prob = rand() % 100 + 1;
+        if (prob <= 15)
+                renovation(bakeries["NYC"]);
+        prob = rand() % 100 + 1;
+        if (prob <= 30)
+                rival(bakeries["NYC"]);
+
+	prob = rand() % 100 + 1;
+        if (prob <= 25)
+                outOfStock(bakeries["PHL"]);
+        prob = rand() % 100 + 1;
+        if (prob <= 15)
+                renovation(bakeries["PHL"]);
+        prob = rand() % 100 + 1;
+        if (prob <= 30)
+                rival(bakeries["PHL"]);
+
 }
 
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
