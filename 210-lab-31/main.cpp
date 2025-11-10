@@ -104,47 +104,73 @@ void backInStock(pair<const string, BAKERY> &bakery){
 	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
 }
 void event(map<string, array<list<string>, 3>> &bakeries){
-
+	bool event = false;
 	int prob = rand() % 100 + 1;  // returns random number 1-100
-	if (prob <= 25)
+	if (prob <= 25){
 		outOfStock(bakeries["SFO"]);
+		event = true;
+	}
 	prob = rand() % 100 + 1;
-	if (prob <= 15)
+	if (prob <= 15){
 		renovation(bakeries["SFO"]);
+                event = true;
+        }
 	prob = rand() % 100 + 1;
-        if (prob <= 30)
+        if (prob <= 30){
 		rival(bakeries["SFO"]);
+                event = true;
+        }
 
 	prob = rand() % 100 + 1;
-	if (prob <= 25)
+	if (prob <= 25){
                 outOfStock(bakeries["CHI"]);
+                event = true;
+        }
         prob = rand() % 100 + 1;
-        if (prob <= 15)
+        if (prob <= 15){
                 renovation(bakeries["CHI"]);
+                event = true;
+        }
         prob = rand() % 100 + 1;
-        if (prob <= 30)
+        if (prob <= 30){
                 rival(bakeries["CHI"]);
+                event = true;
+        }
 
 	prob = rand() % 100 + 1;
-        if (prob <= 25)
+        if (prob <= 25){
                 outOfStock(bakeries["NYC"]);
+                event = true;
+        }
         prob = rand() % 100 + 1;
-        if (prob <= 15)
+        if (prob <= 15){
                 renovation(bakeries["NYC"]);
+                event = true;
+        }
         prob = rand() % 100 + 1;
-        if (prob <= 30)
+        if (prob <= 30){
                 rival(bakeries["NYC"]);
+                event = true;
+        }
 
 	prob = rand() % 100 + 1;
-        if (prob <= 25)
+        if (prob <= 25){
                 outOfStock(bakeries["PHL"]);
+                event = true;
+        }
         prob = rand() % 100 + 1;
-        if (prob <= 15)
+        if (prob <= 15){
                 renovation(bakeries["PHL"]);
+                event = true;
+        }
         prob = rand() % 100 + 1;
-        if (prob <= 30)
+        if (prob <= 30){
                 rival(bakeries["PHL"]);
-
+                event = true;
+        }
+	
+	if (!event)
+		cout << "\nNo significant events occurred this quarter.\n";
 }
 
 void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
