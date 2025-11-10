@@ -177,7 +177,7 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 		cout << left
 		     	<< setw(20) << "Menu Items"
 			<< setw(20) << "Customers"
-			<< setw(20) << "Profits\n";
+			<< setw(20) << "Profits" << endl;
 		//loop here so each list gets fully printed
 		auto itItem = data[0].begin();
 		auto itCust = data[1].begin();
