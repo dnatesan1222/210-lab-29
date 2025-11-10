@@ -95,23 +95,34 @@ void renovation(pair<const string, BAKERY> &bakery){
 	cout << "[renovation()] Renovations for Tara's Bakes at {city} location\n";
 }
 void rival(pair<const string, BAKERY> &bakery){
-	cout << "[rival()] Rival bakery opens in {city}\n";
+	list<string> &cust = bakery.second[1];
+	list<string> updated;
+	string holder;
+	
+	for (string c : cust) {
+        	int customer = stoi(c);
+        	customer = (customer * 0.75);  		//decrease by 25%
+		holder = customer + "";
+		updated.push_back(holder);
+    	}
+	
+	cout << "[rival()] Rival bakery opens in " << bakery.first << endl;
 }
 void outOfStock(pair<const string, BAKERY> &bakery){
-	string city = bakery.first;
-	int prob = rand() % bakery[city][0].size();
+
+	int prob = rand() % bakery.second[0].size();
 	string item;
 	int count = -1;	
-	for (string i : bakery[city][0])
+	for (string i : bakery.second[0])
 		count += 1;
-		if (count == randIndex){
+		if (count == prob){
 			item = i;
 			break;
 		}
 	}
-	bakery[city][0].remove(item);
-
-	cout << '\n' << item << " is unavailable at Tara's Bakes in " << city << " location\n";
+	bakery.second[0].remove(item);
+ 
+	cout << item << " is unavailable at Tara's Bakes in " << bakery.first << " location\n";
 }
 void backInStock(pair<const string, BAKERY> &bakery){
 	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
