@@ -90,7 +90,7 @@ int main(){
 		this_thread::sleep_for(chrono::seconds(4));		//waits for 4sec
 		display(bakeries, qtr);
 	}
-	cout << "\n*** End of Tara's Bakes Simulation (wireframe) ***\n";
+	cout << "\n*** End of Tara's Bakes Simulation ***\n";
 	//End of main function
 }
 
@@ -174,14 +174,20 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 		cout << "Starting Bakery Data:\n";
 	for(const auto &[city, data]:bakeries){
 		cout << '\t' << city << " Location:\n";
-		cout << "\tMenu Items\t\tCustomers\t\tProfits\n";
+		cout << left
+		     	<< setw(20) << "Menu Items"
+			<< setw(20) << "Customers"
+			<< setw(20) << "Profits\n";
 		//loop here so each list gets fully printed
 		auto itItem = data[0].begin();
 		auto itCust = data[1].begin();
 		auto itProf = data[2].begin();
 
 		while (itItem != data[0].end()){
-			cout << '\t' << *itItem << "\t\t\t" << *itCust << "\t\t\t" << *itProf << endl;
+			cout << left
+				<< setw(20) << *itItem 
+				<< setw(20) << *itCust 
+				<< setw(20) << *itProf << endl;
 			++itItem;
 			++itCust;
 			++itProf;
