@@ -173,7 +173,7 @@ void display(map<string, array<list<string>, 3>> &bakeries, int qtr){
 	}else
 		cout << "Starting Bakery Data:\n";
 	for(const auto &[city, data]:bakeries){
-		cout << '\t' << city << " Location:\n";
+		cout << "\t\t" << city << " Location:" << endl;
 		cout << left
 		     	<< setw(20) << "Menu Items"
 			<< setw(20) << "Customers"

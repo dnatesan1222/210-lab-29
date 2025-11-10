@@ -11,7 +11,9 @@ Bugs:
 5. removing "(wireframe)" from the end of simulation message
 
 6. alignment is almost perfect, fline of item, customers, and profits are slightly off - had to use "<< endl;" instead of "\n"
-7.
+
+7. display() only prints based on whether a menu item exist, but we want it to print all customer and profits even if there are more in those lists than the menu items list (edit the while loop conditions)
+
 8.
 9.
 10.
