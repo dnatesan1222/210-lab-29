@@ -76,16 +76,16 @@ int main(){
 	//Begin a time-based simulation for quarterly changes
 	for (int i = 0; i < 28; i++){
 	//For 28 yearly quarters as the time intervals (7 year projection)
-
+		qtr += 1;
 	//Iterate through each bakery location in the map
-		for (int j = 0; j < 4; j++){
 	//For each location, simulate changes
 	//25% chance of a menu item being removed for a quarter - ensure it gets brought back for the next quarter along with sales returning to normal
+			event(bakeries);
 	//Print the changes for this quarter, "{menu item} out of stock decreased {customers and/or profits} in {bakery location}"
 	//Call the function that chooses an event to occur
-		}
 	//The events can impact multiple locations or one location
 	//Wait briefly to simulate the passage of time between quarters
+		display(bakeries, qtr);
 	}
 	cout << "\n*** End of Tara's Bakes Simulation (wireframe) ***\n";
 	//End of main function
@@ -105,6 +105,12 @@ void backInStock(pair<const string, BAKERY> &bakery){
 	cout << "[backInStock()] {menu item} is now restocked at Tara's Bakes in {city} location\n";
 }
 void event(map<string, array<list<string>, 3>> &bakeries){
+	for (int i = 0; i < 4; i++){
+		int prob = rand() % 100 + 1;  // returns random number 1-100
+		if (prob <= 25)
+			outOfStock(bakeries
+
+	}
 	cout << "[event()] Random Event possibly occurs affecting {city} bakery\n";
 }
 
